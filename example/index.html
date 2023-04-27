@@ -17,8 +17,18 @@
     let img = new Image();
     img.src = '123';
     console.log(img);
-    axios.get('https://segmentfault.com/q/1010000040804626').then((res) => {
-      console.log(res);
+    for (let i = 0; i < 3; i++) {
+      axios.get('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
+        console.log(res);
+      });
+    }
+    var observer = new PerformanceObserver(function (list, obj) {
+      const List = [];
+      list.getEntries().forEach((item) => {
+        List.push(item);
+      });
+      console.log(List);
     });
+    observer.observe({ entryTypes: ['resource', 'frame'] });
   </script>
 </html>

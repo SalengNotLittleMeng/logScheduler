@@ -1,6 +1,8 @@
 let current = null;
 class EventList {
-  constructor() {}
+  constructor() {
+    this.eventList = [];
+  }
 }
 
 export function getEventList() {
