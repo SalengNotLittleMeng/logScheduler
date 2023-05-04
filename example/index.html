@@ -13,22 +13,22 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="module">
     import logScheduler from '../lib/logScheduler.js';
-    const app = new logScheduler();
-    let img = new Image();
-    img.src = '123';
-    console.log(img);
-    for (let i = 0; i < 3; i++) {
+    function logger(){
+      const img=new Image()
+    img.src='https://www.ouya5758.com/zb_users/upload/2023/02/20230203050101167537166173970.jpg'
+    }
+    const app = new logScheduler({
+      log:/.jpg/
+    });
+    logger()
       axios.get('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
         console.log(res);
       });
-    }
-    var observer = new PerformanceObserver(function (list, obj) {
-      const List = [];
-      list.getEntries().forEach((item) => {
-        List.push(item);
-      });
-      console.log(List);
-    });
-    observer.observe({ entryTypes: ['resource', 'frame'] });
+      // axios.get('https://www.apishop.net/#/api/detail/?productID=215').then((res) => {
+      //   console.log(res);
+      // });
+    // document.getElementById('app').innerHTML=`
+    // <img src=''>
+    // `
   </script>
 </html>

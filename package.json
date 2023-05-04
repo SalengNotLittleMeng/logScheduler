@@ -13,6 +13,5 @@
     "vite": "^4.0.0",
     "vue": "^3.2.45"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
