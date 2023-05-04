@@ -1,3 +1,4 @@
+// 默认配置对象
 const defaultOptions={   
     trigger:3,
     log:/log.gif/

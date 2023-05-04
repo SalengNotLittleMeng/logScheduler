@@ -25,25 +25,25 @@ export class InterceptorIOCTool{
   }
   createRequestInterceptor(){
     const vm=this
-    return function(url:string){
+    return function(url:url){
       if(vm.logList.isLogger(url)){
-        vm.logList.add(url)
+        vm.logList.add(url.toString())
         return true
       }
-      vm.requestList.add(url)
+      vm.requestList.add(url.toString())
       return false
     }
   }
   createResponseInterceptor(options:Options){
     const vm=this
-    return function(url:string){
+    return function(url:string | URL){
       if(!vm.logList.isLogger(url)){
-        vm.requestList.delete(url)
+        vm.requestList.delete(url.toString())
       } else{
         // 如果是log,直接返回，防止递归死循环
         return false
       }
-      if(vm.requestList.getLength()==options.trigger){
+      if(vm.requestList.getLength()<=options.trigger){
           vm.logList.requestLog()
       }
       return true

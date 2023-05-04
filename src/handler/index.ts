@@ -1,7 +1,7 @@
 export default class RequestHandler {
   // 对xhr进行重写，获取正在请求的xhr数目
   interceptor
-  constructor(interceptor:InitInterceptor) {
+  constructor(interceptor:Interceptor) {
     this.interceptor=interceptor
      this.setRequestHandler();
      this.setResponseHandler();

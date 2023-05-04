@@ -3,15 +3,14 @@ import RequestHandler from './handler';
 import {requestListFactory,logListFactory} from './queue/index'
 import {InterceptorIOCTool} from './queue/index'
 import {mergeOptions} from './options/default'
+import RequestList from './queue/request';
+import LogList from './queue/log';
 export default class logScheduler {
   options:Options;
-  requestHandler:any;
-  requestList:any
-  logList:any;
-  interceptor:InitInterceptor={
-    request:null,
-    response:null
-  };
+  requestHandler:RequestHandler;
+  requestList:RequestList;
+  logList:LogList;
+  interceptor:Interceptor;
   constructor(options:any) {
     this.options=mergeOptions(options)
     this.initRequestQueue()

@@ -8,7 +8,7 @@ export default class LogList extends BaseList{
       this.options=options
     }
     // 判断是否是log
-    isLogger(url:string):boolean {
+    isLogger(url:url):boolean {
       const logReg=new RegExp(this.options.log)
       if (typeof url !== 'string') {
         return false;

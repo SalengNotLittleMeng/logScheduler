@@ -15,6 +15,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
+    "strictPropertyInitialization":false,
     "types": ["vite/client"]
   },
   "include": ["src/*"],
