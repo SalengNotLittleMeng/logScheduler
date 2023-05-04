@@ -6,3 +6,8 @@ type InitInterceptor={
 interface PerformanceEntryResource extends PerformanceEntry{
     initiatorType:string,
 }
+
+type Options={
+    log?:string|RegExp,
+    trigger?:number
+}

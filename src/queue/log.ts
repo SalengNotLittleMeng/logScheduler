@@ -9,7 +9,7 @@ export default class LogList extends BaseList{
     }
     // 判断是否是log
     isLogger(url:string):boolean {
-      const logReg=new RegExp(this.options.log || /.gif/)
+      const logReg=new RegExp(this.options.log)
       if (typeof url !== 'string') {
         return false;
       }

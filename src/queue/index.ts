@@ -34,7 +34,7 @@ export class InterceptorIOCTool{
       return false
     }
   }
-  createResponseInterceptor(){
+  createResponseInterceptor(options:Options){
     const vm=this
     return function(url:string){
       if(!vm.logList.isLogger(url)){
@@ -43,7 +43,7 @@ export class InterceptorIOCTool{
         // 如果是log,直接返回，防止递归死循环
         return false
       }
-      if(vm.requestList.getLength()==0){
+      if(vm.requestList.getLength()==options.trigger){
           vm.logList.requestLog()
       }
       return true

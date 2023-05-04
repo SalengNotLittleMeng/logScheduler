@@ -2,8 +2,9 @@ import {overrideImage} from './proxy';
 import RequestHandler from './handler';
 import {requestListFactory,logListFactory} from './queue/index'
 import {InterceptorIOCTool} from './queue/index'
+import {mergeOptions} from './options/default'
 export default class logScheduler {
-  options:any;
+  options:Options;
   requestHandler:any;
   requestList:any
   logList:any;
@@ -12,7 +13,7 @@ export default class logScheduler {
     response:null
   };
   constructor(options:any) {
-    this.options=options;
+    this.options=mergeOptions(options)
     this.initRequestQueue()
     this.initInterceptor()
     this.initObserver();
@@ -33,6 +34,6 @@ export default class logScheduler {
         this.requestList,this.logList
       )
       this.interceptor.request=interceptorIOCTool.createRequestInterceptor()
-      this.interceptor.response=interceptorIOCTool.createResponseInterceptor()
+      this.interceptor.response=interceptorIOCTool.createResponseInterceptor(this.options)
   }
 }
