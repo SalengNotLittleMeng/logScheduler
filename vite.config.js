@@ -10,7 +10,7 @@ export default defineConfig({
     sourcemap: true,
     watch: {},
     lib: {
-      entry: resolve(__dirname, 'src/main.js'),
+      entry: resolve(__dirname, 'src/main.ts'),
       name: 'logScheduler',
       fileName: 'logScheduler',
     },
