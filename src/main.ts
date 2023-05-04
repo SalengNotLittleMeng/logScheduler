@@ -10,7 +10,10 @@ export default class logScheduler {
   requestHandler:RequestHandler;
   requestList:RequestList;
   logList:LogList;
-  interceptor:Interceptor;
+  interceptor:Interceptor={
+    request:()=>{return true},
+    response:()=>{return true}
+  };
   constructor(options:any) {
     this.options=mergeOptions(options)
     this.initRequestQueue()

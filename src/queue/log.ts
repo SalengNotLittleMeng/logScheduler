@@ -20,24 +20,22 @@ export default class LogList extends BaseList{
       return false;
     }
      async requestLog(){
-          const requestList=this.list.map(url=>{
-            return new Promise((reslove)=>{
-                const img=new rowImage()
-                img.src=url
-                img.onload=function(event){
-                  if(img.onload){
-                    img.onload(event)
-                  }
-                  reslove(url)
-                }
-                img.onerror=function(event){
-                  if(img.onerror){
-                    img.onerror(event)
-                  }
-                  reslove(url)
-                }
-            })
-          })
-        await  multiRequest(requestList,this.options.max)
+      this.list.forEach(url=>{
+        imagePromiseFactory(url)
+      })
+      this.clear()
       }
+  }
+
+  function imagePromiseFactory(url:string){
+    return new Promise<any>((reslove)=>{
+      const img=new rowImage()
+      img.src=url
+      img.onload=function(){
+        reslove(url)
+      }
+      img.onerror=function(){
+        reslove(url)
+      }
+  })
   }
