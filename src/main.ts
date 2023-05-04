@@ -2,10 +2,6 @@ import {overrideImage} from './proxy';
 import RequestHandler from './handler';
 import {requestListFactory,logListFactory} from './queue/index'
 import {InterceptorIOCTool} from './queue/index'
-interface InitInterceptor{
-    request:any,
-    response:any
-}
 export default class logScheduler {
   options:any;
   requestHandler:any;
