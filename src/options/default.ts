@@ -1,5 +1,6 @@
 // 默认配置对象
-const defaultOptions={   
+const defaultOptions={ 
+    max:5,  
     trigger:3,
     log:/log.gif/
 }

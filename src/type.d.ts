@@ -6,7 +6,8 @@ type Interceptor={
 }
 type Options={
     log:string|RegExp,
-    trigger:number
+    trigger:number,
+    max:5
 }
 
 interface PerformanceEntryResource extends PerformanceEntry{
