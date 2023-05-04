@@ -1,12 +1,12 @@
 //队列基类
 export default class BaseList{
+    list:string[]=[]
     constructor(){
-      this.list=[]
     }
-    add(item){
+    add(item:string){
       this.list.push(item)
     }
-    delete(deletedItem){
+    delete(deletedItem:string){
       const deletedIndex=this.list.findIndex(item=>item==deletedItem)
       deletedIndex!=-1 && this.list.splice(deletedIndex,1)
     }

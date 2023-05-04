@@ -28,7 +28,7 @@ export default class logScheduler {
   }
   // 初始化请求队列和打点队列
   initRequestQueue(){
-      this.requestList=requestListFactory(this.options)
+      this.requestList=requestListFactory()
       this.logList=logListFactory(this.options)
   }
   // 初始化拦截器

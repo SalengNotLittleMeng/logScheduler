@@ -1,13 +1,12 @@
 import BaseList from './base'
 //设置节点变动监控，当变化时查找新的图片请求
-function setImageDomObserve(callback){
-    let targetNode = document.querySelector("body");
+function setImageDomObserve(callback:()=>void){
+    let targetNode = document.querySelector("body")||document.createElement('div');
     let observerOptions = {
       childList: true, 
       attributes: true, 
       subtree: true    
     }
-    
     let observer = new MutationObserver(callback);
     observer.observe(targetNode, observerOptions);
   }
@@ -20,7 +19,7 @@ function setImageDomObserve(callback){
     }
     // 查找出目前正在发生的图片请求
     getCurrentImageResquest(){
-       const imageList= Array.from(document.querySelectorAll('img[src]'))
+       const imageList=Array.from(document.querySelectorAll('img[src]')) as HTMLImageElement[]
        imageList.filter(img=>!img.complete).forEach(img=>{
             this.add(img.currentSrc)
             img.addEventListener('error',()=>{
