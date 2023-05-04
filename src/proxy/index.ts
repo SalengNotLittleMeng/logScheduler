@@ -15,7 +15,8 @@ export function overrideImage(callback:(arg0:string)=>boolean){
           if(prototype=='src'){
            if(callback(value)){
             //当为打点信息时，走拦截器逻辑并在此处阻止打点请求
-            return Reflect.set(target, prototype,'', receiver)
+              target[prototype]=''
+              return true
            }
           }
           
