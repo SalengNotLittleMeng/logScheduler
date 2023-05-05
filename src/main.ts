@@ -12,7 +12,7 @@ export default class logScheduler {
   logList:LogList;
   interceptor:Interceptor={
     request:()=>{return true},
-    response:()=>{return true}
+    response:()=>{return new Promise((reslove)=>{reslove(true)})}
   };
   constructor(options:any) {
     this.options=mergeOptions(options)

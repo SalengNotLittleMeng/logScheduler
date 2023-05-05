@@ -25,7 +25,7 @@ export class InterceptorIOCTool{
       this.logList.getCurrentRequestImpl(this.getCurrentRequest.bind(this))
   }
   getCurrentRequest(){
-     return this.requestList.getLength()
+     return this.requestList.getLengthAsync()
   }
   createRequestInterceptor(){
     const vm=this
@@ -40,14 +40,14 @@ export class InterceptorIOCTool{
   }
   createResponseInterceptor(options:Options){
     const vm=this
-    return function(url:string | URL){
+    return async function(url:string | URL){
       if(!vm.logList.isLogger(url)){
         vm.requestList.delete(url.toString())
       } else{
         // 如果是log,直接返回，防止递归死循环
         return false
       }
-      if(vm.requestList.getLength()<=options.trigger){
+      if(await vm.requestList.getLengthAsync()<=options.trigger){
           vm.logList.requestLog()
       }
       return true

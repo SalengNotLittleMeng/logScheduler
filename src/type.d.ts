@@ -1,8 +1,9 @@
 type url=string|URL
 type InterceptorItem=(url:url)=>boolean;
+type InterceptorItemAysnc=(url:url)=>Promise<boolean>
 type Interceptor={
     request:InterceptorItem,
-    response:InterceptorItem
+    response:InterceptorItemAysnc
 }
 type Options={
     log:string|RegExp,

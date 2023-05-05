@@ -23,6 +23,7 @@ export default class RequestHandler {
     const vm=this
     let observer = new PerformanceObserver(function (entries) {
       entries.getEntries().forEach((entry) => {
+        console.log('23')
           if(['img','xmlhttprequest'].includes((entry as PerformanceEntryResource).initiatorType)){
             vm.interceptor.response(entry.name)
           }

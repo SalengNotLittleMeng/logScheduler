@@ -3,20 +3,20 @@ import { rowImage } from '../proxy'
 //打点队列
 export default class LogList extends BaseList{
     options:Options;
-    getCurrentRequestFn:()=>number;
+    getCurrentRequestFn:()=>Promise<number>;
     constructor(options:Options){
       super()
       this.options=options;
     }
-    add(item: string): void {
+    async add(item: string): Promise<void>{
       this.list.push(item) 
       // 当前本身就是空置时直接触发
-      if(this.getCurrentRequestFn()<=this.options.trigger){
+      if(await this.getCurrentRequestFn()<=this.options.trigger){
           this.requestLog()
       }
     }
     // 获取请求数目的接口
-    getCurrentRequestImpl(getCurrentRequestFn:()=>number){
+    getCurrentRequestImpl(getCurrentRequestFn:()=>Promise<number>){
        this.getCurrentRequestFn=getCurrentRequestFn
     }
     // 判断是否是log
