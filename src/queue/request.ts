@@ -25,6 +25,9 @@ function setImageDomObserve(callback:()=>void){
             img.addEventListener('error',()=>{
               this.delete(img.currentSrc)
             })
+            img.addEventListener('load',()=>{
+              this.delete(img.currentSrc)
+            })
        })
     }
   }

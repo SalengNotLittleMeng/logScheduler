@@ -1,12 +1,23 @@
 import BaseList from './base'
 import { rowImage } from '../proxy'
-import {multiRequest} from '../utils'
 //打点队列
 export default class LogList extends BaseList{
-    options:any;
-    constructor(options={}){
+    options:Options;
+    getCurrentRequestFn:()=>number;
+    constructor(options:Options){
       super()
       this.options=options;
+    }
+    add(item: string): void {
+      this.list.push(item) 
+      // 当前本身就是空置时直接触发
+      if(this.getCurrentRequestFn()<=this.options.trigger){
+          this.requestLog()
+      }
+    }
+    // 获取请求数目的接口
+    getCurrentRequestImpl(getCurrentRequestFn:()=>number){
+       this.getCurrentRequestFn=getCurrentRequestFn
     }
     // 判断是否是log
     isLogger(url:url):boolean {

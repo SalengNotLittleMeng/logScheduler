@@ -9,7 +9,7 @@ export function requestListFactory():RequestList{
     }
     return request
 }
-export function logListFactory(options:any):LogList{
+export function logListFactory(options:Options):LogList{
    if(!log){
     return new LogList(options)
    }
@@ -22,6 +22,10 @@ export class InterceptorIOCTool{
   constructor(requestList:RequestList,logList:LogList){
       this.requestList=requestList
       this.logList=logList
+      this.logList.getCurrentRequestImpl(this.getCurrentRequest.bind(this))
+  }
+  getCurrentRequest(){
+     return this.requestList.getLength()
   }
   createRequestInterceptor(){
     const vm=this

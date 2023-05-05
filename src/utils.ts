@@ -4,7 +4,7 @@ export function  multiRequest(urls:string[], maxNum:number,
     let count=0
     return new Promise(function(resolve){
         while(count<maxNum){
-        // next()
+        next()
         count++
     }
     function next(){
