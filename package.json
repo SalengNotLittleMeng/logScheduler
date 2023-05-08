@@ -4,14 +4,12 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "tsc && vite build",
+    "build": "tsc && vite build"
   },
   "devDependencies": {
     "typescript": "^4.9.3",
-    "vite": "^4.0.0",
-    "vue": "^3.2.45"
+    "vite": "^4.0.0"
   },
   "dependencies": {}
 }
