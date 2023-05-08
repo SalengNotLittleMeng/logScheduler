@@ -30,10 +30,6 @@ function setImageDomObserve(callback:()=>void){
        const imageList=Array.from(document.querySelectorAll('img[src]')) as HTMLImageElement[]
        imageList.filter(img=>!img.complete).forEach(img=>{
             this.add(img.currentSrc)
-            // 由于perfromceObsever无法检测到加载失败，因此需要手动增加监听器出队列
-            img.addEventListener('error',()=>{
-              this.delete(img.currentSrc)
-            })
        })
     }
   }
