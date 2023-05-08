@@ -2,13 +2,13 @@ import BaseList from './base'
 import { rowImage } from '../proxy'
 //打点队列
 export default class LogList extends BaseList<LogListItem>{
-    options:Options;
-    getCurrentRequestFn:()=>Promise<number>;
+    private options:Options;
+    private  getCurrentRequestFn:()=>Promise<number>;
     constructor(options:Options){
       super()
       this.options=options;
     }
-    async add(item: LogListItem): Promise<void>{
+   public async add(item: LogListItem): Promise<void>{
       this.list.push(item) 
       // 当前本身就是空置时直接触发
       if(await this.getCurrentRequestFn()<=this.options.trigger){
@@ -16,11 +16,11 @@ export default class LogList extends BaseList<LogListItem>{
       }
     }
     // 获取请求数目的接口
-    getCurrentRequestImpl(getCurrentRequestFn:()=>Promise<number>){
+   public getCurrentRequestImpl(getCurrentRequestFn:()=>Promise<number>){
        this.getCurrentRequestFn=getCurrentRequestFn
     }
     // 判断是否是log
-    isLogger(url:url):boolean {
+   public isLogger(url:url):boolean {
       const logRegList=this.options.log.map(item=>{
         return new RegExp(item)
       })
@@ -35,7 +35,7 @@ export default class LogList extends BaseList<LogListItem>{
       return false;
     }
     // 执行请求
-     async requestLog(){
+    public async requestLog(){
       this.list.map(logInfoItem=>{
         this.delete(logInfoItem)
         switch(logInfoItem.type){
@@ -51,6 +51,7 @@ export default class LogList extends BaseList<LogListItem>{
       })
       }
   }
+  // 执行XHR请求，这里直接用实例调用send方法
   function xhrPromiseFactory(logInfoItem:LogListItemXhr){
     return new Promise<string>((resolve)=>{
         try{
@@ -67,6 +68,7 @@ export default class LogList extends BaseList<LogListItem>{
         }catch(e){}
     })
   }
+  // 执行图片请求
   function imagePromiseFactory(url:string){
     return new Promise<string>((reslove)=>{
       const img=new rowImage()

@@ -25,17 +25,19 @@ export function logObjectFactory(url:url,type:LogType,xhrInstance?:XMLHttpReques
 }
 // 解耦工具类，将主类和队列类进行解耦
 export class InterceptorIOCTool{
-  requestList:RequestList
-  logList:LogList
+  private requestList:RequestList
+  private logList:LogList
   constructor(requestList:RequestList,logList:LogList){
       this.requestList=requestList
       this.logList=logList
       this.logList.getCurrentRequestImpl(this.getCurrentRequest.bind(this))
   }
-  getCurrentRequest(){
+  // 获取当前正在进行的请求
+  public getCurrentRequest(){
      return this.requestList.getLengthAsync()
   }
-  createRequestInterceptor(){
+  // 创建请求拦截器
+  public createRequestInterceptor(){
     const vm=this
     return function(url:url,type:LogType){
       const logObject=logObjectFactory(url,type)
@@ -47,7 +49,8 @@ export class InterceptorIOCTool{
       return false
     }
   }
-  createResponseInterceptor(options:Options){
+  // 创建响应拦截器
+  public createResponseInterceptor(options:Options){
     const vm=this
     return async function(url:string | URL){
       if(!vm.logList.isLogger(url)){
