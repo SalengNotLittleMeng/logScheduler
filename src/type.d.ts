@@ -14,3 +14,8 @@ type Options={
 interface PerformanceEntryResource extends PerformanceEntry{
     initiatorType:string,
 }
+type LogType='xhr'|'image'
+type LogListItem={
+    url:string,
+    type:LogType
+}

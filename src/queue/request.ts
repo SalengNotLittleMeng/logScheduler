@@ -12,7 +12,7 @@ function setImageDomObserve(callback:()=>void){
   }
   
   // 请求队列
-  export default class RequestList extends BaseList {
+  export default class RequestList extends BaseList<string> {
     constructor() {
       super()
       setImageDomObserve(this.getCurrentImageResquest.bind(this))

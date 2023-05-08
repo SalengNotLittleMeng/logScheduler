@@ -15,6 +15,12 @@ export function logListFactory(options:Options):LogList{
    }
    return log
 }
+function logObjectFactory(url:url,type:LogType):LogListItem{
+  return {
+    url:url.toString(),
+    type
+  }
+}
 // 解耦工具类，将主类和队列类进行解耦
 export class InterceptorIOCTool{
   requestList:RequestList
@@ -29,9 +35,10 @@ export class InterceptorIOCTool{
   }
   createRequestInterceptor(){
     const vm=this
-    return function(url:url){
+    return function(url:url,type:LogType){
+      const logObject=logObjectFactory(url,type)
       if(vm.logList.isLogger(url)){
-        vm.logList.add(url.toString())
+        vm.logList.add(logObject)
         return true
       }
       vm.requestList.add(url.toString())

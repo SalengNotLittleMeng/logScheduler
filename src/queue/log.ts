@@ -1,14 +1,14 @@
 import BaseList from './base'
 import { rowImage } from '../proxy'
 //打点队列
-export default class LogList extends BaseList{
+export default class LogList extends BaseList<LogListItem>{
     options:Options;
     getCurrentRequestFn:()=>Promise<number>;
     constructor(options:Options){
       super()
       this.options=options;
     }
-    async add(item: string): Promise<void>{
+    async add(item: LogListItem): Promise<void>{
       this.list.push(item) 
       // 当前本身就是空置时直接触发
       if(await this.getCurrentRequestFn()<=this.options.trigger){
@@ -31,8 +31,8 @@ export default class LogList extends BaseList{
       return false;
     }
      async requestLog(){
-      this.list.forEach(url=>{
-        imagePromiseFactory(url)
+      this.list.forEach(logInfoItem=>{
+        imagePromiseFactory(logInfoItem.url)
       })
       this.clear()
       }
