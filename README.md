@@ -11,9 +11,11 @@
     //   当正在执行的请求小于等于设定值时触发打点，默认是3
       trigger:3
     });
+    // 动态添加调度目标，可以用于预加载
+    scheduler.prefetch('https://jsonplaceholder.typicode.com/todos/2')
 ```
 
 ## 注意
 1.logScheduler会获取当前正在进行的xhr和图片请求后，将打点事件放入事件队列，当这两种请求数量较少时发送队列中的请求。对于视频流，文件流，websocket繁忙的处理目前未涉及
 
-2.打点请求目前仅支持Image的方式发送，使用xhr和Beacon请求的打点暂不支持
+2.打点请求目前仅支持Image和XHR两种方式，Beacon请求的打点暂不支持
