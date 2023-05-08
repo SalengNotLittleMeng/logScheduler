@@ -1,5 +1,5 @@
 type url=string|URL
-type InterceptorItem=(url:url)=>boolean;
+type InterceptorItem=(url:url,type:LogType)=>boolean;
 type InterceptorItemAysnc=(url:url)=>Promise<boolean>
 type Interceptor={
     request:InterceptorItem,

@@ -11,7 +11,7 @@ export default class RequestHandler {
     const { open } = XMLHttpRequest.prototype;
     const vm=this
     XMLHttpRequest.prototype.open = function (this:any,method, url, async, user, password) {
-      vm.interceptor.request(url)
+      vm.interceptor.request(url,'xhr')
       open.call(this, method,url,async,user,password);
     } as { 
       (method: string, url: string | URL): void;
