@@ -82,8 +82,7 @@ export function cloneDeep<T>(obj: T, cache = new WeakMap()): T {
         Object.keys(obj)
             .forEach(key => {
                 if (obj.hasOwnProperty(key)) {
-                        // @ts-ignore
-                    
+                        // @ts-ignore                
                     temp[key] = cloneDeep(obj[key], cache)
                 }
             })

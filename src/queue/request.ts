@@ -18,7 +18,7 @@ function setImageDomObserve(callback:()=>void){
       setImageDomObserve(this.getCurrentImageResquest.bind(this))
     }
     // 这里增加异步操作，考虑请求连续增长的问题
-    async getLengthAsync(): Promise<number>{
+   public async getLengthAsync(): Promise<number>{
       return new Promise((reslove)=>{
           setTimeout(()=>{
             reslove(this.getLength())
@@ -26,7 +26,7 @@ function setImageDomObserve(callback:()=>void){
       })
     }
     // 查找出目前正在发生的图片请求
-    getCurrentImageResquest(){
+   public getCurrentImageResquest(){
        const imageList=Array.from(document.querySelectorAll('img[src]')) as HTMLImageElement[]
        imageList.filter(img=>!img.complete).forEach(img=>{
             this.add(img.currentSrc)
