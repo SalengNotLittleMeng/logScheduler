@@ -15,6 +15,12 @@
     scheduler.prefetch('https://jsonplaceholder.typicode.com/todos/2')
 ```
 
+## 调试
+
+克隆仓库后使用npm i 或yarn 安装依赖，然后执行npm run dev 命令，即可开始调试，修改代码后即可自动执行打包
+
+可以通过example目录下的index.html来验证打包后的项目功能
+
 ## 注意
 1.logScheduler会获取当前正在进行的xhr和图片请求后，将打点事件放入事件队列，当这两种请求数量较少时发送队列中的请求。对于视频流，文件流，websocket繁忙的处理目前未涉及
 
