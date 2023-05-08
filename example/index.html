@@ -19,9 +19,10 @@
     img.src='https://www.ouya5758.com/zb_users/upload/2023/02/20230203050101167537166173970.jpg'
     }
     const app = new logScheduler({
-      log:[/.jpg/,'https://jsonplaceholder.typicode.com/todos/2']
+      log:[/.jpg/]
     });
     logger()
+    app.prefetch('https://jsonplaceholder.typicode.com/todos/2')
       axios.get('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
         console.log(res);
       });

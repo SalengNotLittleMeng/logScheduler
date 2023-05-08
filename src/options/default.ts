@@ -24,3 +24,16 @@ export function mergeOptions(userOptions:Options){
    baseOptions.log=baseOptions.log.filter(item=>item)
    return baseOptions
 }
+// 扩展配置
+export function extendOptions(options:Options,key:string,value:any){
+    if(Array.isArray(options[key])){
+        options[key].push(value)
+    }else if(typeof options[key] === 'object' || options[key] !== null){
+        options[key]={
+            ...options[key],
+            ...value
+        }
+    }else{
+        options[key]=value
+    }
+}
