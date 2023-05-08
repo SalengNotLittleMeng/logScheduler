@@ -13,16 +13,20 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script type="module">
     import logScheduler from '../lib/logScheduler.js';
+
     function logger(){
       const img=new Image()
     img.src='https://www.ouya5758.com/zb_users/upload/2023/02/20230203050101167537166173970.jpg'
     }
     const app = new logScheduler({
-      log:/.jpg/
+      log:[/.jpg/,'https://jsonplaceholder.typicode.com/todos/2']
     });
     logger()
       axios.get('https://jsonplaceholder.typicode.com/todos/1').then((res) => {
         console.log(res);
+      });
+      axios.get('https://jsonplaceholder.typicode.com/todos/2').then((res) => {
+        console.log(res.data);
       });
       // axios.get('https://www.apishop.net/#/api/detail/?productID=215').then((res) => {
       //   console.log(res);

@@ -18,8 +18,7 @@ export function overrideImage(callback:(arg0:string,arg1:LogType)=>boolean){
               target[prototype]=''
               return true
            }
-          }
-          
+          }  
           return Reflect.set(target, prototype, value, receiver)
         }
       })

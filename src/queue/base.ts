@@ -13,6 +13,9 @@ export default class BaseList<T>{
     getLength(){
       return this.list.length
     }
+    includes(item:T){
+      return this.list.includes(item)
+    }
     clear(){
        while(this.list.length){
         this.list.pop()

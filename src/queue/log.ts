@@ -21,25 +21,54 @@ export default class LogList extends BaseList<LogListItem>{
     }
     // 判断是否是log
     isLogger(url:url):boolean {
-      const logReg=new RegExp(this.options.log)
+      const logRegList=this.options.log.map(item=>{
+        return new RegExp(item)
+      })
       if (typeof url !== 'string') {
         return false;
       }
-      if (logReg.test(url)) {
+      if (logRegList.some(reg=>{
+        return reg.test(url)
+      })) {
         return true;
       }
       return false;
     }
+    // 执行请求
      async requestLog(){
-      this.list.forEach(logInfoItem=>{
-        imagePromiseFactory(logInfoItem.url)
+      this.list.map(logInfoItem=>{
+        this.delete(logInfoItem)
+        switch(logInfoItem.type){
+          case 'xhr':{
+            xhrPromiseFactory(logInfoItem as LogListItemXhr)
+            break;
+          }
+          case 'image':{
+            imagePromiseFactory(logInfoItem.url)
+            break;
+          }
+        }
       })
-      this.clear()
       }
   }
-
+  function xhrPromiseFactory(logInfoItem:LogListItemXhr){
+    return new Promise<string>((resolve)=>{
+        try{
+          const xhr=logInfoItem.instance
+          xhr.addEventListener("load", function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                resolve(logInfoItem.url)
+            }
+          });
+          xhr.addEventListener("error",function(){
+              resolve(logInfoItem.url)
+          })
+          logInfoItem.instance.send(logInfoItem.data)
+        }catch(e){}
+    })
+  }
   function imagePromiseFactory(url:string){
-    return new Promise<any>((reslove)=>{
+    return new Promise<string>((reslove)=>{
       const img=new rowImage()
       img.src=url
       img.onload=function(){

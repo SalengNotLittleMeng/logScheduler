@@ -15,10 +15,12 @@ export function logListFactory(options:Options):LogList{
    }
    return log
 }
-function logObjectFactory(url:url,type:LogType):LogListItem{
+export function logObjectFactory(url:url,type:LogType,xhrInstance?:XMLHttpRequest,data?:XMLHttpRequestData):LogListItem{
   return {
     url:url.toString(),
-    type
+    type,
+    instance:xhrInstance,
+    data
   }
 }
 // 解耦工具类，将主类和队列类进行解耦
