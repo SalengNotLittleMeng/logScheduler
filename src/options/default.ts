@@ -17,7 +17,7 @@ export function mergeOptions(userOptions:Options){
                 userOptions[key] && (baseOptions[key] as LogOptionItem[]).push(userOptions[key])
             }
         }else{
-           ( baseOptions[key] as number)=userOptions[key] as number
+           ( baseOptions[key] as number)=((userOptions[key] as number)||userOptions[key]===0)
            ?userOptions[key]:baseOptions[key]
         }
    })

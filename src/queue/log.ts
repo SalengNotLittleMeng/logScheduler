@@ -1,5 +1,6 @@
 import BaseList from './base'
 import { rowImage } from '../proxy'
+import { cloneDeep } from '../utils';
 //打点队列
 export default class LogList extends BaseList<LogListItem>{
     private options:Options;
@@ -36,7 +37,8 @@ export default class LogList extends BaseList<LogListItem>{
     }
     // 执行请求
     public async requestLog(){
-      this.list.map(logInfoItem=>{
+      const LogHandlerList=cloneDeep(this.list)
+      LogHandlerList.filter(item=>item).map(logInfoItem=>{
         this.delete(logInfoItem)
         switch(logInfoItem.type){
           case 'xhr':{

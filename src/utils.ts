@@ -103,3 +103,16 @@ export function cloneDeep<T>(obj: T, cache = new WeakMap()): T {
     cache.set(obj, temp)
     return temp
   }
+
+//   检查是否是完整url
+export function isCompleteURL(url:string){
+    return /^http/.test(url)
+}
+// 将url包装成完整的url 
+export function transfromCompleteURl(url:string|URL){
+    url=url.toString()
+    if(isCompleteURL(url)){
+        return  url
+    }
+    return `${window.location.origin}`+(url[0]!=='/'?`/${url}`:`${url}`)
+}

@@ -1,5 +1,6 @@
 import LogList from "../queue/log";
 import {logObjectFactory} from '../queue/index'
+import { transfromCompleteURl} from '../utils'
 export default class RequestHandler {
   // 对xhr进行重写，获取正在请求的xhr数目
   private interceptor;
@@ -15,15 +16,16 @@ export default class RequestHandler {
     const { open,send } = XMLHttpRequest.prototype;
     const vm=this
     XMLHttpRequest.prototype.open = function (this:any,method, url, async, user, password) {
-      vm.interceptor.request(url,'xhr')
+      vm.interceptor.request(transfromCompleteURl(url),'xhr')
       open.call(this, method,url,async,user,password);
     } as { 
       (method: string, url: string | URL): void;
       (method: string, url: string | URL, async: boolean, username?: string | null | undefined, password?: string | null | undefined): void;
         }
     XMLHttpRequest.prototype.send=function(data:Document|XMLHttpRequestBodyInit|null|undefined){
-        if(vm.requestAbleList.include(this.responseURL)){
-           vm.requestAbleList.add(this.responseURL,this,data)
+        const responseURL=transfromCompleteURl(this.responseURL)
+        if(vm.requestAbleList.include(responseURL)){
+           vm.requestAbleList.add(responseURL,this,data)
            return
         }
         send.call(this,data)

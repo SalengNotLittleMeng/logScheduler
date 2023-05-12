@@ -16,10 +16,20 @@ export default class logScheduler {
     response:()=>{return new Promise((reslove)=>{reslove(true)})}
   };
   constructor(options:any) {
-    this.options=mergeOptions(options)
-    this.initRequestQueue()
-    this.initInterceptor()
-    this.initObserver();
+    // SSR支持，保证可以在部分页面生效
+      if(options.usePathSSR){
+        const usePaths=options.usePathSSR
+        if(!Array.isArray(usePaths)){
+          return
+        }
+       if(!usePaths.includes( window.location.pathname)){
+          return
+       }
+      }
+      this.options=mergeOptions(options)
+      this.initRequestQueue()
+      this.initInterceptor()
+      this.initObserver();
   }
   // 初始化图片劫持和请求观测
   private initObserver() {

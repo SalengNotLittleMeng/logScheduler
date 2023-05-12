@@ -11,7 +11,7 @@ export function overrideImage(callback:(arg0:string,arg1:LogType)=>boolean){
         get(target,prototype,receiver){
             return Reflect.get(target, prototype, receiver)
         },
-        set(target,prototype,value,receiver){
+        set(target,prototype,value){
           if(prototype=='src'){
            if(callback(value,'image')){
             //当为打点信息时，走拦截器逻辑并在此处阻止打点请求
@@ -19,7 +19,13 @@ export function overrideImage(callback:(arg0:string,arg1:LogType)=>boolean){
               return true
            }
           }  
-          return Reflect.set(target, prototype, value, receiver)
+          try{
+            ( target as any)[prototype]=value
+            return true
+          }catch(e){
+            return true
+          }
+
         }
       })
       return proxy
